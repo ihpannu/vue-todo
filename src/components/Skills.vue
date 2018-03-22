@@ -3,7 +3,8 @@
 <div class="holder">
 <form @submit.prevent="addSkill">
 
-    <input type="text" placeholder="Enter a skill you have.." v-model="skill">
+    <input type="text" placeholder="Enter a skill you have.." v-model="skill" v-validate="'min:5'" name="skill">
+<p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
 
 
   <ul>
@@ -27,8 +28,14 @@ export default {
   },
   methods: {
     addSkill() {
-      this.skills.push({ skill: this.skill });
-      this.skill = '';
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          this.skills.push({ skill: this.skill });
+          this.skill = '';
+        } else {
+          console.log('Not Valid');
+        }
+      });
     }
   }
   // props: {
@@ -52,8 +59,8 @@ ul {
 ul li {
   padding: 20px;
   font-size: 1.3em;
-  background-color: #e0edf4;
-  border-left: 5px solid #3eb3f6;
+  background-color: rgb(172, 251, 222);
+  border-left: 5px solid #61bd8d;
   margin-bottom: 2px;
   color: #3e5252;
 }
@@ -74,5 +81,12 @@ input {
   font-size: 1.3em;
   background-color: #323333;
   color: #687f7f;
+}
+.alert {
+  background: #fdf2ce;
+  font-weight: bold;
+  display: inline-block;
+  padding: 5px;
+  margin-top: -20px;
 }
 </style>
