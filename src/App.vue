@@ -48,7 +48,7 @@ nav a {
   text-decoration: none;
   background: #fff;
   border-radius: 3px;
-  color: rgba(0, 110, 255, 1);
+  color: #55b785;
   font-weight: bold;
   margin-right: 15px;
 }
