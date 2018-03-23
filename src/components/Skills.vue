@@ -10,7 +10,13 @@
     </transition>
 
   <ul>
-    <li v-for="(data , index) in skills" :key="index" >{{data.skill}} </li>
+
+<transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bouceOutDown" >
+    <li v-for="(data , index) in skills" :key="index" >{{data.skill}}
+
+      <i class="fas fa-minus-circle" v-on:click="remove(index)"></i>
+       </li>
+</transition-group>
 
   </ul>
   </form>
@@ -38,6 +44,9 @@ export default {
           console.log('Not Valid');
         }
       });
+    },
+    remove(id) {
+      this.skills.splice(id, 1);
     }
   }
 };
@@ -89,5 +98,9 @@ input {
   display: inline-block;
   padding: 5px;
   margin-top: -20px;
+}
+
+i {
+  float: right;
 }
 </style>
