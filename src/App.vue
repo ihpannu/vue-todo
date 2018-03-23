@@ -28,7 +28,8 @@ body {
   display: grid;
   grid-template-rows: auto;
   justify-items: center;
-  align-items: center;
+  padding-top: 50px;
+  /* align-items: center; */
 }
 body,
 html {
