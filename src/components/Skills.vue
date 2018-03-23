@@ -4,8 +4,10 @@
 <form @submit.prevent="addSkill">
 
     <input type="text" placeholder="Enter a skill you have.." v-model="skill" v-validate="'min:5'" name="skill">
-<p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
 
+    <transition  name="alert-in" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+      <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+    </transition>
 
   <ul>
     <li v-for="(data , index) in skills" :key="index" >{{data.skill}} </li>
@@ -38,14 +40,13 @@ export default {
       });
     }
   }
-  // props: {
-  //   msg: String
-  // }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped >
+<style scoped>
+@import 'https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css';
+
 .holder {
   background: #fff;
 }
